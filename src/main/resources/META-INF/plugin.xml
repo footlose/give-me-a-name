@@ -1,0 +1,47 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.wang.give-me-a-name</id>
+
+    <name>Give-Me-A-Name</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="i@wangshuai.space" url="https://wangshuai.space">wangshuai.space</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    When I wanted a variable name, I racked my brains until one day I had enough, so I developed this plugin that can automatically suggest some names, you can choose one and apply it to your code, with names in the format domain, enum, dto, etc
+    <br/>
+    <em>当我想要起一个变量名称的时候，我会绞尽脑汁，直到有一天我受够了，所以我开发了这个插件，他可以自动给你一些名称的建议，你可以从中选择一个并应用到你的代码上，里边提供了例如 domain,enum,dto等格式的名称</em>
+    <br/>
+    使用方式:
+    <br/>
+    选择要起名的中文，选择后点击右键 选择Give me a name
+    <br/>
+    在下方弹出的可选项中，选择一个将会自动复制到你的剪切板中
+
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- 自定义 底部view -->
+        <executor id="CustomRunExecutor" order="last"
+                  implementation="com.wang.givemeaname.window.ConsoleToolExecutor"/>
+    </extensions>
+
+    <actions>
+
+        <action id="selectText" class="com.wang.givemeaname.action.SelectText" text="Give Me a Name">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt G"/>
+        </action>
+
+    </actions>
+</idea-plugin>
